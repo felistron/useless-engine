@@ -2,31 +2,22 @@
 {
     public class Renderer
     {
-        private static readonly char PIXEL_CHAR = '.';
-        private static readonly char EMPTY_CHAR = ' ';
-
         public int Width { get; }
         public int Height { get; }
-        public char[,] Buffer { get; private set; }
-        private char[,] _emptyBuffer;
-        public TextWriter BufferWriter { get; private set; }
+        public uint[,] Buffer { get; private set; }
+        private readonly uint[,] _emptyBuffer;
 
-        public Renderer(int width, int height, TextWriter bufferWriter)
+        private readonly float _hStep;
+        private readonly float _vStep;
+
+        public Renderer(int width, int height)
         {
             Width = width;
             Height = height;
-            Buffer = new char[width + 1, height + 1];
-            BufferWriter = bufferWriter;
-
-            _emptyBuffer = new char[width + 1, height + 1];
-
-            for (int j = 0; j <= Height; j++)
-            {
-                for (int i = 0; i <= Width; i++)
-                {
-                    _emptyBuffer[i, j] = EMPTY_CHAR;
-                }
-            }
+            Buffer = new uint[width + 1, height + 1];
+            _emptyBuffer = new uint[width + 1, height + 1];
+            _hStep = 1 / (float)width;
+            _vStep = 1 / (float)height;
         }
 
         public void DrawPoint(Vector2f point)
@@ -39,12 +30,12 @@
             if (Math.Abs(x) > 1) return;
             if (Math.Abs(y) > 1) return;
 
-            int charX = (int)((x + 1) * Width / 2);
-            int charY = (int)((y + 1) * Height/ 2);
+            // Transforms (x,y) NDC into screen coordinates, defined by width and height.
+            int charX = (int)((x + 1) * Width * 0.5f);
+            int charY = (int)((y + 1) * Height * 0.5f);
 
             if (charX > Width || charX < 0 || charY > Height || charY < 0) return;
-
-            Buffer[charX, charY] = PIXEL_CHAR;
+            Buffer[charX, charY] = 1;
         }
 
 
@@ -67,12 +58,10 @@
                 return;
             }
 
-            float step = 0.01f;
-
             // Vertical line
             if (x1 == x2)
             {
-                float dt = (y2 - y1) > 0 ? step : -step;
+                float dt = (y2 - y1) > 0 ? _vStep : -_vStep;
                 for (float y = y1; (dt * (y2 - y)) >= 0; y += dt)
                 {
                     DrawPoint(x1, y);
@@ -83,7 +72,7 @@
             // Horizontal line
             if (y1 == y2)
             {
-                float dt = (x2 - x1) > 0 ? step : -step;
+                float dt = (x2 - x1) > 0 ? _hStep : -_hStep;
                 for (float x = x1; (dt * (x2 - x)) >= 0; x += dt)
                 {
                     DrawPoint(x, y1);
@@ -92,7 +81,7 @@
             }
 
             // Every other case
-            float dx = (x2 - x1) > 0 ? step : -step;
+            float dx = (x2 - x1) > 0 ? _hStep : -_hStep;
             float m = (float)(y2 - y1) / (float)(x2 - x1);
 
             for (float x = x1; (dx * (x2 - x)) >= 0; x += dx)

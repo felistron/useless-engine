@@ -2,6 +2,8 @@
 {
     public class Window
     {
+        private static readonly char[] TILES = { ' ', 'X' };
+
         public string Title { get; set; }
         public int Width { get; set; }
         public int Height { get; set; }
@@ -25,7 +27,7 @@
             Height = height;
             Fps = fps;
 
-            _renderer = new(Width, Height, Console.Out);
+            _renderer = new(Width, Height);
             Console.Title = Title;
             Console.CursorVisible = CursorVisible;
 
@@ -49,13 +51,17 @@
                 OnUpdate(_dt);
                 OnRender(_renderer);
 
+                Console.CursorTop = 0;
+                Console.CursorLeft = 0;
+
                 string data = string.Empty;
 
                 for (int j = Height; j >= 0; j--)
                 {
                     for (int i = 0; i <= Width; i++)
                     {
-                        data += _renderer.Buffer[i, j];
+                        if (_renderer.Buffer[i, j] >= TILES.Length) continue;
+                        data += TILES[_renderer.Buffer[i, j]];
                     }
                     data += '\n';
                 }
