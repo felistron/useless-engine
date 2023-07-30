@@ -1,4 +1,6 @@
-﻿using Useless.Core;
+﻿using Useless.Core.Graphics;
+using Useless.Core.Input;
+using Useless.Core.Windowing;
 using Useless.Math;
 
 const string _title = "useless engine";
@@ -6,7 +8,15 @@ const int _width = 128;
 const int _height = 72;
 const int _fps = 30;
 
-Window window = new(_title, _width, _height, _fps);
+WindowOptions options = new()
+{
+    Title = _title,
+    Width = _width,
+    Height = _height,
+    Fps = _fps,
+};
+
+IWindow window = new ConsoleWindow(options);
 
 
 Vec3f[] vertices = new Vec3f[8]
@@ -32,9 +42,9 @@ window.OnRender = (renderer) =>
     renderer.Clear();
 
     Matx4 transform = Matx4.Identity()
-                        * Matx4.RotateX(window.TimeAlive)
-                        * Matx4.RotateY(window.TimeAlive)
-                        * Matx4.RotateZ(window.TimeAlive);
+                        * Matx4.RotateX(window.Options.TimeAlive)
+                        * Matx4.RotateY(window.Options.TimeAlive)
+                        * Matx4.RotateZ(window.Options.TimeAlive);
 
     for (int i = 0; i < indices.Length - 1; i++)
     {
@@ -49,11 +59,11 @@ window.OnRender = (renderer) =>
     }
 };
 
-window.OnKeyEvent = (key) =>
+window.OnKeyPress = (key) =>
 {
     switch (key)
     {
-        case ConsoleKey.Escape:
+        case Key.Esc:
             window.Close();
             break;
     }

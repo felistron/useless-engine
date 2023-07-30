@@ -1,17 +1,17 @@
 ﻿using Useless.Math;
 
-namespace Useless.Core
+namespace Useless.Core.Graphics
 {
     public class Renderer
     {
-        public int Width { get; }
-        public int Height { get; }
+        public uint Width { get; }
+        public uint Height { get; }
         public uint[,] Buffer { get; private set; }
 
         private readonly float _hStep;
         private readonly float _vStep;
 
-        public Renderer(int width, int height)
+        public Renderer(uint width, uint height)
         {
             Width = width;
             Height = height;
@@ -61,8 +61,8 @@ namespace Useless.Core
             // Vertical line
             if (x1 == x2)
             {
-                float dt = (y2 - y1) > 0 ? _vStep : -_vStep;
-                for (float y = y1; (dt * (y2 - y)) >= 0; y += dt)
+                float dt = y2 - y1 > 0 ? _vStep : -_vStep;
+                for (float y = y1; dt * (y2 - y) >= 0; y += dt)
                 {
                     DrawPoint(x1, y);
                 }
@@ -72,8 +72,8 @@ namespace Useless.Core
             // Horizontal line
             if (y1 == y2)
             {
-                float dt = (x2 - x1) > 0 ? _hStep : -_hStep;
-                for (float x = x1; (dt * (x2 - x)) >= 0; x += dt)
+                float dt = x2 - x1 > 0 ? _hStep : -_hStep;
+                for (float x = x1; dt * (x2 - x) >= 0; x += dt)
                 {
                     DrawPoint(x, y1);
                 }
@@ -81,12 +81,12 @@ namespace Useless.Core
             }
 
             // Every other case
-            float dx = (x2 - x1) > 0 ? _hStep : -_hStep;
+            float dx = x2 - x1 > 0 ? _hStep : -_hStep;
             float m = (float)(y2 - y1) / (float)(x2 - x1);
 
-            for (float x = x1; (dx * (x2 - x)) >= 0; x += dx)
+            for (float x = x1; dx * (x2 - x) >= 0; x += dx)
             {
-                DrawPoint(x,  (m * (x - x1)) + y1);
+                DrawPoint(x, m * (x - x1) + y1);
             }
         }
 

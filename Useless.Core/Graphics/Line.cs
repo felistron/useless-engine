@@ -1,6 +1,6 @@
 ﻿using Useless.Math;
 
-namespace Useless.Core
+namespace Useless.Core.Graphics
 {
     public class Line
     {
