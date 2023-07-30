@@ -9,27 +9,32 @@ const int _fps = 30;
 Window window = new(_title, _width, _height, _fps);
 
 
-Vec3f[] vertices = new Vec3f[3]
+Vec3f[] vertices = new Vec3f[8]
 {
-    new Vec3f(-0.5f, -0.5f, 0),
-    new Vec3f( 0.0f,  0.5f, 0),
-    new Vec3f( 0.5f, -0.5f, 0),
+    new Vec3f(-0.5f, -0.5f, -0.5f),
+    new Vec3f(-0.5f,  0.5f, -0.5f),
+    new Vec3f( 0.5f,  0.5f, -0.5f),
+    new Vec3f( 0.5f, -0.5f, -0.5f),
+
+    new Vec3f(-0.5f, -0.5f,  0.5f),
+    new Vec3f(-0.5f,  0.5f,  0.5f),
+    new Vec3f( 0.5f,  0.5f,  0.5f),
+    new Vec3f( 0.5f, -0.5f,  0.5f),
 };
 
-uint[] indices = new uint[4]
+uint[] indices = new uint[16]
 {
-    0, 1, 2, 0
+    0, 1, 5, 1, 2, 6, 2, 3, 7, 3, 0, 4, 7, 6, 5, 4
 };
-
-double scale = 0;
 
 window.OnRender = (renderer) =>
 {
     renderer.Clear();
 
-    scale = Math.Sin(window.TimeAlive);
-
-    Matx4 transform = Matx4.Identity() * Matx4.RotateX(window.TimeAlive) * Matx4.RotateY(window.TimeAlive) * Matx4.RotateZ(window.TimeAlive);
+    Matx4 transform = Matx4.Identity()
+                        * Matx4.RotateX(window.TimeAlive)
+                        * Matx4.RotateY(window.TimeAlive)
+                        * Matx4.RotateZ(window.TimeAlive);
 
     for (int i = 0; i < indices.Length - 1; i++)
     {

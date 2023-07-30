@@ -2,7 +2,7 @@
 {
     public class Window
     {
-        private static readonly char[] TILES = { ' ', 'X' };
+        private static readonly char[] TILES = { ' ', '.' };
 
         public string Title { get; set; }
         public int Width { get; set; }
