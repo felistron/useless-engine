@@ -1,4 +1,4 @@
-﻿namespace useless_engine.math
+﻿namespace Useless.Math
 {
     public class Vec2<T>
     {

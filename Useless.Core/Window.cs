@@ -1,4 +1,4 @@
-﻿namespace useless_engine.core
+﻿namespace Useless.Core
 {
     public class Window
     {

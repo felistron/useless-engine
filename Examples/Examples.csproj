@@ -9,8 +9,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\core\useless_engine.core.csproj" />
-    <ProjectReference Include="..\math\useless_engine.math.csproj" />
+    <ProjectReference Include="..\Useless.Core\Useless.Core.csproj" />
+    <ProjectReference Include="..\Useless.Math\Useless.Math.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,6 +1,6 @@
-﻿using useless_engine.math;
+﻿using Useless.Math;
 
-namespace useless_engine.core
+namespace Useless.Core
 {
     public class Line
     {

@@ -1,6 +1,4 @@
-﻿using System.Text;
-
-namespace useless_engine.math
+﻿namespace Useless.Math
 {
     public class Vec4<T>
     {

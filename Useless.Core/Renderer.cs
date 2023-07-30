@@ -1,6 +1,6 @@
-﻿using useless_engine.math;
+﻿using Useless.Math;
 
-namespace useless_engine.core
+namespace Useless.Core
 {
     public class Renderer
     {
@@ -27,8 +27,8 @@ namespace useless_engine.core
 
         public void DrawPoint(float x, float y)
         {
-            if (Math.Abs(x) > 1) return;
-            if (Math.Abs(y) > 1) return;
+            if (System.Math.Abs(x) > 1) return;
+            if (System.Math.Abs(y) > 1) return;
 
             // Transforms (x,y) NDC into screen coordinates, defined by width and height.
             int charX = (int)((x + 1) * Width * 0.5f);

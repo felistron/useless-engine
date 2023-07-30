@@ -1,6 +1,4 @@
-﻿using System.Text;
-
-namespace useless_engine.math
+﻿namespace Useless.Math
 {
     public class Matx4
     {
@@ -69,8 +67,8 @@ namespace useless_engine.math
 
         public static Matx4 RotateX(double a)
         {
-            float cos = (float)Math.Cos(a);
-            float sin = (float)Math.Sin(a);
+            float cos = (float)System.Math.Cos(a);
+            float sin = (float)System.Math.Sin(a);
 
             return new Matx4()
             {
@@ -86,8 +84,8 @@ namespace useless_engine.math
 
         public static Matx4 RotateY(double a)
         {
-            float cos = (float)Math.Cos(a);
-            float sin = (float)Math.Sin(a);
+            float cos = (float)System.Math.Cos(a);
+            float sin = (float)System.Math.Sin(a);
 
             return new Matx4()
             {
@@ -103,8 +101,8 @@ namespace useless_engine.math
 
         public static Matx4 RotateZ(double a)
         {
-            float cos = (float)Math.Cos(a);
-            float sin = (float)Math.Sin(a);
+            float cos = (float)System.Math.Cos(a);
+            float sin = (float)System.Math.Sin(a);
 
             return new Matx4()
             {
@@ -210,19 +208,6 @@ namespace useless_engine.math
             }
 
             return c;
-        }
-
-        public override string ToString()
-        {
-            StringBuilder sb = new();
-
-            for (int i = 0; i < _data.Length; i++)
-            {
-                sb.Append(_data[i].ToString() + ' ');
-                if (((i + 1) % 4) == 0) sb.Append('\n');
-            }
-
-            return sb.ToString();
         }
     }
 }

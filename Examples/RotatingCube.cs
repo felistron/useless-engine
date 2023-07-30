@@ -1,5 +1,5 @@
-﻿using useless_engine.core;
-using useless_engine.math;
+﻿using Useless.Core;
+using Useless.Math;
 
 const string _title = "useless engine";
 const int _width = 128;
