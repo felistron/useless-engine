@@ -11,6 +11,9 @@ namespace Useless.Core.Windowing
         public Action<double> OnUpdate { get; set; }
         public Action<Key> OnKeyPress { get; set; }
 
+        public double TimeAlive { get; }
+        public bool ShouldClose { get; }
+
         public void Run();
         public void Close();
     }

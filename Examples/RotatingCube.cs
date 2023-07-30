@@ -42,9 +42,9 @@ window.OnRender = (renderer) =>
     renderer.Clear();
 
     Matx4 transform = Matx4.Identity()
-                        * Matx4.RotateX(window.Options.TimeAlive)
-                        * Matx4.RotateY(window.Options.TimeAlive)
-                        * Matx4.RotateZ(window.Options.TimeAlive);
+                        * Matx4.RotateX(window.TimeAlive)
+                        * Matx4.RotateY(window.TimeAlive)
+                        * Matx4.RotateZ(window.TimeAlive);
 
     for (int i = 0; i < indices.Length - 1; i++)
     {

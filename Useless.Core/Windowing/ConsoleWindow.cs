@@ -17,7 +17,10 @@ namespace Useless.Core.Windowing
         public Action<double> OnUpdate { get; set; } = (_) => { };
         
         public Action<Key> OnKeyPress { get; set; } = (_) => { };
-        
+
+        public double TimeAlive { get; private set; }
+        public bool ShouldClose { get; private set; }
+
 
         private readonly Renderer _renderer;
 
@@ -41,7 +44,7 @@ namespace Useless.Core.Windowing
         {
             new Thread(() =>
             {
-                while (!Options.ShouldClose)
+                while (!ShouldClose)
                 {
                     OnKeyPress((Key)Console.ReadKey().Key);
                 }
@@ -52,13 +55,13 @@ namespace Useless.Core.Windowing
 
         public void Run()
         {
-            while (!Options.ShouldClose)
+            while (!ShouldClose)
             {
                 _newTime = new DateTimeOffset(DateTime.UtcNow).ToUnixTimeMilliseconds();
                 _dt = (_newTime - (double)_oldTime) / 1000;
                 _oldTime = _newTime;
 
-                Options.TimeAlive += _dt;
+                TimeAlive += _dt;
                 OnUpdate(_dt);
                 OnRender(_renderer);
 
@@ -88,7 +91,7 @@ namespace Useless.Core.Windowing
 
         public void Close()
         {
-            Options.ShouldClose = true;
+            ShouldClose = true;
         }
     }
 }

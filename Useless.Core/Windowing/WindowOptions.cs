@@ -7,9 +7,7 @@
         public uint Height { get; set; }
         public int Fps { get; set; }
         public bool VSync { get; set; }
-        public double TimeAlive { get; set; }
         public bool CursorVisible { get; set; }
-        public bool ShouldClose { get; set; }
 
         public WindowOptions()
         {
@@ -18,9 +16,7 @@
             Height = 600;
             Fps = 60;
             VSync = true;
-            TimeAlive = 0;
             CursorVisible = true;
-            ShouldClose = false;
         }
     }
 }
