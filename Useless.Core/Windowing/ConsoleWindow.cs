@@ -5,7 +5,7 @@ namespace Useless.Core.Windowing
 {
     public class ConsoleWindow : IWindow
     {
-        private static readonly char[] TILES = { ' ', '.' };
+        private static readonly string charColors = " .\'`^\",:;Il!i><~+_-?][}{1)(|\\/tfjrxnuvczXYUJCLQ0OZmwqpdbkhao*#MW&8%B@$";
 
 
         public WindowOptions Options { get; }
@@ -70,12 +70,13 @@ namespace Useless.Core.Windowing
 
                 string data = string.Empty;
 
-                for (int j = (int)Options.Height; j >= 0; j--)
+                for (int j = 0; j <= Options.Height; j++)
                 {
                     for (int i = 0; i <= Options.Width; i++)
                     {
-                        if (_renderer.Buffer[i, j] >= TILES.Length) continue;
-                        data += TILES[_renderer.Buffer[i, j]];
+                        int color = (int)System.Math.Round((double)(_renderer.Buffer[i, j] & 0x00FFFFFF) / (double)(0xFFFFFF) * (charColors.Length - 1));
+                        if (color >= charColors.Length) continue;
+                        data += charColors[color];
                     }
                     data += '\n';
                 }
