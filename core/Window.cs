@@ -8,6 +8,7 @@
         public int Width { get; set; }
         public int Height { get; set; }
         public int Fps { get; set; }
+        public double TimeAlive { get; private set; }
         public bool ShouldClose { get; private set; } = false;
         public bool CursorVisible { get; set; } = false;
         public Action<double> OnUpdate { get; set; } = (_) => { };
@@ -48,6 +49,7 @@
                 _dt = ((double)_newTime - (double)_oldTime) / 1000;
                 _oldTime = _newTime;
 
+                TimeAlive += _dt;
                 OnUpdate(_dt);
                 OnRender(_renderer);
 

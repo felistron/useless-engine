@@ -1,11 +1,12 @@
-﻿namespace useless_engine.core
+﻿using useless_engine.math;
+
+namespace useless_engine.core
 {
     public class Renderer
     {
         public int Width { get; }
         public int Height { get; }
         public uint[,] Buffer { get; private set; }
-        private readonly uint[,] _emptyBuffer;
 
         private readonly float _hStep;
         private readonly float _vStep;
@@ -15,12 +16,11 @@
             Width = width;
             Height = height;
             Buffer = new uint[width + 1, height + 1];
-            _emptyBuffer = new uint[width + 1, height + 1];
             _hStep = 1 / (float)width;
             _vStep = 1 / (float)height;
         }
 
-        public void DrawPoint(Vector2f point)
+        public void DrawPoint(Vec2f point)
         {
             DrawPoint(point.X, point.Y);
         }
@@ -44,7 +44,7 @@
             DrawLine(line.P1.X, line.P1.Y, line.P2.X, line.P2.Y);
         }
 
-        public void DrawLine(Vector2f p1, Vector2f p2)
+        public void DrawLine(Vec2f p1, Vec2f p2)
         {
             DrawLine(p1.X, p2.Y, p2.X, p2.Y);
         }
@@ -93,7 +93,7 @@
 
         public void Clear()
         {
-            Buffer = _emptyBuffer;
+            Buffer = new uint[Width + 1, Height + 1];
         }
     }
 }
