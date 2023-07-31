@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
@@ -9,8 +9,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Useless.Core\Useless.Core.csproj" />
-    <ProjectReference Include="..\Useless.Math\Useless.Math.csproj" />
+    <ProjectReference Include="..\..\Useless.Core\Useless.Core.csproj" />
+    <ProjectReference Include="..\..\Useless.Math\Useless.Math.csproj" />
   </ItemGroup>
 
 </Project>
