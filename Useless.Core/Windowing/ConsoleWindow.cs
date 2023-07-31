@@ -3,7 +3,7 @@ using Useless.Core.Input;
 
 namespace Useless.Core.Windowing
 {
-    public class ConsoleWindow : IWindow
+    internal class ConsoleWindow : IWindow
     {
         private static readonly string charColors = " .\'`^\",:;Il!i><~+_-?][}{1)(|\\/tfjrxnuvczXYUJCLQ0OZmwqpdbkhao*#MW&8%B@$";
 

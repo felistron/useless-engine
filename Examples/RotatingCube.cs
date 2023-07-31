@@ -16,7 +16,7 @@ WindowOptions options = new()
     Fps = _fps,
 };
 
-IWindow window = new ConsoleWindow(options);
+IWindow window = Window.CreateConsoleWindow(options);
 
 
 Vec3f[] vertices = new Vec3f[8]
